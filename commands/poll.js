@@ -1,11 +1,11 @@
 const Discord = require("discord.js");
 
 exports.run = (client, message, args, level) => {
-
   let question = args.slice(0).join(" ");
 
-  if (args.length === 0)
-  return message.reply('**Invalid Format:** `~Poll <Question>`')
+  if (args.length === 0) {
+    return message.reply('**Invalid Format:** `~Poll <Question>`');
+  }
 
   const embed = new Discord.RichEmbed()
   .setTitle("React to vote!")
