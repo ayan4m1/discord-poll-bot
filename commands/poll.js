@@ -7,19 +7,43 @@ exports.run = (client, message, args, level) => {
     return message.reply('**Invalid Format:** `~Poll <Question>`');
   }
 
-  const embed = new Discord.RichEmbed()
-  .setTitle("React to vote!")
-  .setColor("#ff0000")
-  .setDescription(`${question}`)
-  .setFooter("Closes in 24 Hours!")
+  const openEmbed = new Discord.RichEmbed()
+    .setTitle("React to vote!")
+    .setColor("#ff0000")
+    .setDescription(`${question}`)
+    .setFooter("Closes in 24 Hours!");
 
-  message.delete()
+  message.delete();
   
-  message.channel.send({embed})
+  message.channel.send({openEmbed})
   .then(msg => {
+    let yes=null,no=null,question=null;
     msg.react('👍')
+        .then(reaction => {
+            yes = reaction;
+        })
+        .catch(console.error);
+
     msg.react('👎')
-    msg.react('🤷')
+        .then(reaction => {
+            no = reaction;
+        })
+        .catch(console.error);
+
+    msg.react('❓')
+        .then(reaction => {
+            question = reaction;
+        })
+        .catch(console.error);
+
+    setTimeout(() =>{
+        const closeEmbed = new Discord.RichEmbed()
+          .setTitle("Poll Closed!")
+          .setColor("#00ff00")
+          .setDescription(`Results: 👍 ${yes.count-1}, 👎 ${no.count-1}, ❓ ${question.count-1}`);
+
+        message.channel.send({closeEmbed});
+    }, 8.64e7);
   })
   .catch(() => console.error('Emoji failed to react.'));
 }
