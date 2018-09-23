@@ -13,6 +13,8 @@ exports.run = (client, message, args, level) => {
   .setDescription(`${question}`)
   .setFooter("Closes in 24 Hours!")
 
+  message.delete()
+  
   message.channel.send({embed})
   .then(msg => {
     msg.react('👍')
