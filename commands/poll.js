@@ -22,7 +22,4 @@ exports.run = (client, message, args, level) => {
     msg.react('🤷')
   })
   .catch(() => console.error('Emoji failed to react.'));
-
 }
-
- 
