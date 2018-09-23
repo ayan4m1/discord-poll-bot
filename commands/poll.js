@@ -8,10 +8,10 @@ exports.run = (client, message, args, level) => {
   return message.reply('**Invalid Format:** `~Poll <Question>`')
 
   const embed = new Discord.RichEmbed()
-  .setTitle("A Poll Has Been Started!")
-  .setColor("#5599ff")
+  .setTitle("React to vote!")
+  .setColor("#ff0000")
   .setDescription(`${question}`)
-  .setFooter(`Poll Started By: ${message.author.username}`, `${message.author.avatarURL}`)
+  .setFooter("Closes in 24 Hours!")
 
   message.channel.send({embed})
   .then(msg => {
